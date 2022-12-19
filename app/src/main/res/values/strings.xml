@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ListOfShopping</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lcd">Дисплеи:</string>
+    <string name="others">Аксессуары:</string>
+    <string name="change_ports">Charge Ports:</string>
+    <string name="Delete">Удалить</string>
+    <string name="Save">Сохранить</string>
+</resources>
