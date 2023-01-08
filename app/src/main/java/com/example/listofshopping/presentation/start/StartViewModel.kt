@@ -1,18 +1,17 @@
 package com.example.listofshopping.presentation.start
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.listofshopping.data.ListOfShoppingRepositoryImpl
 import com.example.listofshopping.domain.DeleteListOfShoppingItemUseCase
 import com.example.listofshopping.domain.GetListOfShoppingItemsUseCase
 import com.example.listofshopping.domain.ListOfShoppingModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class StartViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository = ListOfShoppingRepositoryImpl(application)
-    private val getListOfShoppingItemsUseCase = GetListOfShoppingItemsUseCase(repository)
-    private val deleteItemUseCase = DeleteListOfShoppingItemUseCase(repository)
+class StartViewModel @Inject constructor(
+    private val getListOfShoppingItemsUseCase: GetListOfShoppingItemsUseCase,
+            private val deleteItemUseCase: DeleteListOfShoppingItemUseCase
+) : ViewModel() {
 
 
     val listOfShopping = getListOfShoppingItemsUseCase.getItems()

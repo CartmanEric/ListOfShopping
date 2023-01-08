@@ -1,6 +1,7 @@
 package com.example.listofshopping.presentation.start
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,14 +17,30 @@ import com.example.listofshopping.R
 import com.example.listofshopping.databinding.FragmentStartBinding
 import com.example.listofshopping.domain.ListOfShoppingModel
 import com.example.listofshopping.presentation.ListOfShoppingAdapter
+import com.example.listofshopping.presentation.ListOfShoppingApp
+import com.example.listofshopping.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class StartFragment : Fragment() {
+
+    private val component by lazy {
+        (requireActivity().application as ListOfShoppingApp).component}
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private var _binding: FragmentStartBinding? = null
     private val binding: FragmentStartBinding
         get() = _binding ?: throw RuntimeException("FragmentStartBinding == null")
 
-    lateinit var viewModel: StartViewModel
+    private val viewModel by  lazy {
+        ViewModelProvider(this,viewModelFactory)[StartViewModel::class.java]
+
+    }
     lateinit var listOfShoppingAdapter: ListOfShoppingAdapter
+
+    override fun onAttach(context: Context) {
+component.injectStartFragment(this)
+        super.onAttach(context)
+    }
 
 
     override fun onCreateView(
@@ -37,7 +54,6 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[StartViewModel::class.java]
         viewModel.listOfShopping.observe(viewLifecycleOwner) {
             listOfShoppingAdapter.submitList(it)
         }

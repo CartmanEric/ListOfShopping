@@ -1,5 +1,6 @@
 package com.example.listofshopping.presentation.edit
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,17 +10,35 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.listofshopping.R
-import com.example.listofshopping.databinding.FragmentAddBinding
 import com.example.listofshopping.databinding.FragmentEditBinding
 import com.example.listofshopping.domain.ListOfShoppingModel
+import com.example.listofshopping.presentation.ListOfShoppingApp
+import com.example.listofshopping.presentation.ViewModelFactory
+import javax.inject.Inject
 
 
 class EditFragment : Fragment() {
+
+    private val component by lazy {
+        (requireActivity().application as ListOfShoppingApp).component}
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by  lazy {
+        ViewModelProvider(this,viewModelFactory)[EditViewModel::class.java]
+    }
     private var _binding: FragmentEditBinding? = null
     private val binding: FragmentEditBinding
         get() = _binding ?: throw RuntimeException("FragmentEditBinding == null")
-    lateinit var viewModel: EditViewModel
+
     private val args by navArgs<EditFragmentArgs>()
+
+    override fun onAttach(context: Context) {
+        component.injectEditFragment(this)
+
+        super.onAttach(context)
+    }
 
 
     override fun onCreateView(
@@ -32,7 +51,6 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[EditViewModel::class.java]
         viewModel.checkConditionScreen.observe(viewLifecycleOwner){
             navigation()
         }

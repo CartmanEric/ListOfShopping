@@ -1,14 +1,15 @@
 package com.example.listofshopping.data
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.listofshopping.domain.ListOfShoppingModel
 import com.example.listofshopping.domain.ListOfShoppingRepository
+import javax.inject.Inject
 
-class ListOfShoppingRepositoryImpl(application: Application) : ListOfShoppingRepository {
-    private val listOfShoppingDao = AppDatabase.getInstance(application).listOfShoppingDao()
-    private val mapper = ListOfShoppingMapper()
+class ListOfShoppingRepositoryImpl @Inject constructor(
+    private val mapper: ListOfShoppingMapper,
+    private val listOfShoppingDao: ListOfShoppingDao) : ListOfShoppingRepository {
+
     override fun getItems(): LiveData<List<ListOfShoppingModel>> {
         return Transformations.map(listOfShoppingDao.getItems()) {
             mapper.mapListDbModelToListEntity(it)
