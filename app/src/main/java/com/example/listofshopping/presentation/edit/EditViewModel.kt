@@ -1,20 +1,16 @@
 package com.example.listofshopping.presentation.edit
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.listofshopping.data.ListOfShoppingRepositoryImpl
+import androidx.lifecycle.*
 import com.example.listofshopping.domain.DeleteListOfShoppingItemUseCase
 import com.example.listofshopping.domain.EditListOfShoppingItemUseCase
 import com.example.listofshopping.domain.ListOfShoppingModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditViewModel(application: Application): AndroidViewModel(application) {
-    private val repository = ListOfShoppingRepositoryImpl(application)
-    private val editItemUseCase = EditListOfShoppingItemUseCase(repository)
-    private val deleteItemUseCase = DeleteListOfShoppingItemUseCase(repository)
+class EditViewModel @Inject constructor(
+    private val deleteItemUseCase: DeleteListOfShoppingItemUseCase,
+    private val editItemUseCase: EditListOfShoppingItemUseCase
+): ViewModel() {
     private val _checkConditionScreen = MutableLiveData<Unit>()
     val checkConditionScreen: LiveData<Unit>
         get() = _checkConditionScreen
