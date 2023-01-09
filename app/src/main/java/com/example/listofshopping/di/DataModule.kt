@@ -9,9 +9,9 @@ import dagger.Provides
 @Module
 class DataModule {
 
-        @Provides
-        fun provideListOfShoppingDao(application: Application): ListOfShoppingDao{
-            return AppDatabase.getInstance(application).listOfShoppingDao()
-        }
+    @Provides
+    fun provideListOfShoppingDao(application: Application): ListOfShoppingDao {
+        return AppDatabase.getInstance(application).listOfShoppingDao()
+    }
 
 }

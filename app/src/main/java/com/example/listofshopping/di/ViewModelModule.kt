@@ -9,22 +9,21 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 
-
 @Module
 interface ViewModelModule {
 
     @IntoMap
     @ViewModelKey(StartViewModel::class)
     @Binds
-    fun bindStartViewModel(impl: StartViewModel):ViewModel
+    fun bindStartViewModel(impl: StartViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(AddViewModel::class)
     @Binds
-    fun bindAddViewModel(impl: AddViewModel):ViewModel
+    fun bindAddViewModel(impl: AddViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(EditViewModel::class)
     @Binds
-    fun bindEditViewModel(impl: EditViewModel):ViewModel
+    fun bindEditViewModel(impl: EditViewModel): ViewModel
 }

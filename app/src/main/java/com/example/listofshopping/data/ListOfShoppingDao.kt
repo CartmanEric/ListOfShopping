@@ -19,6 +19,4 @@ interface ListOfShoppingDao {
     suspend fun deleteShopItem(itemId: Int)
 
 
-
-
 }

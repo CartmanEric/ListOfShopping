@@ -10,16 +10,14 @@ import javax.inject.Inject
 
 class StartViewModel @Inject constructor(
     private val getListOfShoppingItemsUseCase: GetListOfShoppingItemsUseCase,
-            private val deleteItemUseCase: DeleteListOfShoppingItemUseCase
+    private val deleteItemUseCase: DeleteListOfShoppingItemUseCase
 ) : ViewModel() {
-
 
     val listOfShopping = getListOfShoppingItemsUseCase.getItems()
 
     fun deleteItem(item: ListOfShoppingModel) {
         viewModelScope.launch {
             deleteItemUseCase.deleteItem(item)
-
         }
     }
 }

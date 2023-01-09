@@ -19,14 +19,15 @@ import javax.inject.Inject
 class AddFragment : Fragment() {
 
     private val component by lazy {
-        (requireActivity().application as ListOfShoppingApp).component}
+        (requireActivity().application as ListOfShoppingApp).component
+    }
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[AddViewModel::class.java]
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
-    private val viewModel by  lazy {
-        ViewModelProvider(this,viewModelFactory)[AddViewModel::class.java]
-    }
 
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding
@@ -36,7 +37,6 @@ class AddFragment : Fragment() {
         component.injectAddFragment(this)
         super.onAttach(context)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +52,6 @@ class AddFragment : Fragment() {
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
-
     }
 
     private fun saveItem() {
@@ -60,8 +59,7 @@ class AddFragment : Fragment() {
             binding.etLcd.text.toString(),
             binding.etOthers.text.toString(),
             binding.edPort.text.toString(),
-
-            )
+        )
         viewModel.addItem(currentItem)
     }
 

@@ -20,13 +20,14 @@ import javax.inject.Inject
 class EditFragment : Fragment() {
 
     private val component by lazy {
-        (requireActivity().application as ListOfShoppingApp).component}
+        (requireActivity().application as ListOfShoppingApp).component
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel by  lazy {
-        ViewModelProvider(this,viewModelFactory)[EditViewModel::class.java]
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[EditViewModel::class.java]
     }
     private var _binding: FragmentEditBinding? = null
     private val binding: FragmentEditBinding
@@ -36,7 +37,6 @@ class EditFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         component.injectEditFragment(this)
-
         super.onAttach(context)
     }
 
@@ -51,7 +51,7 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.checkConditionScreen.observe(viewLifecycleOwner){
+        viewModel.checkConditionScreen.observe(viewLifecycleOwner) {
             navigation()
         }
         initView()
@@ -94,6 +94,7 @@ class EditFragment : Fragment() {
             etOthers.setText(args.toEdit.others)
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

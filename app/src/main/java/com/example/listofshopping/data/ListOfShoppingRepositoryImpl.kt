@@ -8,7 +8,8 @@ import javax.inject.Inject
 
 class ListOfShoppingRepositoryImpl @Inject constructor(
     private val mapper: ListOfShoppingMapper,
-    private val listOfShoppingDao: ListOfShoppingDao) : ListOfShoppingRepository {
+    private val listOfShoppingDao: ListOfShoppingDao
+) : ListOfShoppingRepository {
 
     override fun getItems(): LiveData<List<ListOfShoppingModel>> {
         return Transformations.map(listOfShoppingDao.getItems()) {
