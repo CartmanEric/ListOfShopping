@@ -24,24 +24,25 @@ import javax.inject.Inject
 class StartFragment : Fragment() {
 
     private val component by lazy {
-        (requireActivity().application as ListOfShoppingApp).component}
+        (requireActivity().application as ListOfShoppingApp).component
+    }
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[StartViewModel::class.java]
+    }
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
     private var _binding: FragmentStartBinding? = null
     private val binding: FragmentStartBinding
         get() = _binding ?: throw RuntimeException("FragmentStartBinding == null")
 
-    private val viewModel by  lazy {
-        ViewModelProvider(this,viewModelFactory)[StartViewModel::class.java]
-
-    }
     lateinit var listOfShoppingAdapter: ListOfShoppingAdapter
 
     override fun onAttach(context: Context) {
-component.injectStartFragment(this)
+        component.injectStartFragment(this)
         super.onAttach(context)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,9 +71,7 @@ component.injectStartFragment(this)
             listOfShoppingAdapter = ListOfShoppingAdapter()
             layoutManager = manager
             adapter = listOfShoppingAdapter
-
         }
-
     }
 
     private fun setupClickListening() {
@@ -81,7 +80,6 @@ component.injectStartFragment(this)
                 StartFragmentDirections.actionStartFragmentToEditFragment(it)
             )
         }
-
     }
 
     private fun navigation() {
@@ -112,11 +110,9 @@ component.injectStartFragment(this)
     }
 
     private fun showDialog(item: ListOfShoppingModel) {
-
         val listener = DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> viewModel.deleteItem(item)
-
             }
         }
         val dialog = AlertDialog.Builder(requireContext())
@@ -132,6 +128,5 @@ component.injectStartFragment(this)
         super.onDestroyView()
         _binding = null
     }
-
 
 }

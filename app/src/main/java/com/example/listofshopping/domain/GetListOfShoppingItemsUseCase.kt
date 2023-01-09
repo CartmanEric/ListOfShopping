@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import javax.inject.Inject
 
 class GetListOfShoppingItemsUseCase @Inject constructor(
-    private val listOfShoppingRepository: ListOfShoppingRepository) {
+    private val listOfShoppingRepository: ListOfShoppingRepository
+) {
     fun getItems(): LiveData<List<ListOfShoppingModel>> {
         return listOfShoppingRepository.getItems()
     }

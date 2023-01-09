@@ -7,7 +7,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddViewModel @Inject constructor(
-    private val addItemUseCase: AddListOfShoppingItemUseCase) : ViewModel() {
+    private val addItemUseCase: AddListOfShoppingItemUseCase
+) : ViewModel() {
 
     private val _shouldCloseScreen = MutableLiveData<Unit>()
     val shouldCloseScreen: LiveData<Unit>
