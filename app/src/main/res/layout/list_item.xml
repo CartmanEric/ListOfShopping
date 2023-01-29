@@ -24,11 +24,13 @@
 
             <TextView
                 android:id="@+id/tv_lcd"
+                android:maxLines="5"
+                android:ellipsize="end"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_margin="3dp"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="@string/empty"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -39,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="@string/empty"
                 android:textColor="#493737"
                 android:textSize="20sp"
                 android:textStyle="bold" />

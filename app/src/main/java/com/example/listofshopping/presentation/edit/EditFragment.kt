@@ -14,6 +14,8 @@ import com.example.listofshopping.databinding.FragmentEditBinding
 import com.example.listofshopping.domain.ListOfShoppingModel
 import com.example.listofshopping.presentation.ListOfShoppingApp
 import com.example.listofshopping.presentation.ViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -34,6 +36,8 @@ class EditFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentEditBinding == null")
 
     private val args by navArgs<EditFragmentArgs>()
+
+
 
     override fun onAttach(context: Context) {
         component.injectEditFragment(this)
@@ -56,6 +60,7 @@ class EditFragment : Fragment() {
         }
         initView()
         toolBarSetup()
+
     }
 
 
@@ -65,6 +70,7 @@ class EditFragment : Fragment() {
 
     private fun saveItem() {
         val currentItem = ListOfShoppingModel(
+            getCurrentData(),
             binding.etLcd.text.toString(),
             binding.etOthers.text.toString(),
             binding.edPort.text.toString(),
@@ -84,7 +90,7 @@ class EditFragment : Fragment() {
     }
 
     private fun navigation() {
-        findNavController().navigate(R.id.action_editFragment_to_startFragment)
+        findNavController().popBackStack()
     }
 
     private fun initView() {
@@ -94,6 +100,12 @@ class EditFragment : Fragment() {
             etOthers.setText(args.toEdit.others)
         }
     }
+
+    private fun getCurrentData(): String {
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm", Locale.US)
+        return sdf.format(Date())
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

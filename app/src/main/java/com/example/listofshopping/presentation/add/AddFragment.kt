@@ -13,6 +13,8 @@ import com.example.listofshopping.databinding.FragmentAddBinding
 import com.example.listofshopping.domain.ListOfShoppingModel
 import com.example.listofshopping.presentation.ListOfShoppingApp
 import com.example.listofshopping.presentation.ViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -56,6 +58,7 @@ class AddFragment : Fragment() {
 
     private fun saveItem() {
         val currentItem = ListOfShoppingModel(
+            getCurrentData(),
             binding.etLcd.text.toString(),
             binding.etOthers.text.toString(),
             binding.edPort.text.toString(),
@@ -71,6 +74,11 @@ class AddFragment : Fragment() {
             }
             true
         }
+    }
+
+    private fun getCurrentData(): String {
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm", Locale.US)
+        return sdf.format(Date())
     }
 
     override fun onDestroyView() {

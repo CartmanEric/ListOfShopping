@@ -1,6 +1,7 @@
 package com.example.listofshopping.domain
 
 data class ListOfShoppingModel (
+    val data: String,
     val lcd: String,
     val others: String,
     val ports: String,

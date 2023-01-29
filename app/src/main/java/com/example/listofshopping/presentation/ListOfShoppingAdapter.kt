@@ -21,7 +21,7 @@ class ListOfShoppingAdapter : ListAdapter<ListOfShoppingModel,
         val currentItem = getItem(position)
         with(holder.itemBinding) {
             tvLcd.text = currentItem.lcd
-            tvOthers.text = currentItem.others
+            tvOthers.text = currentItem.data
             root.setOnClickListener {
                 onItemClickListener?.invoke(currentItem)
             }
