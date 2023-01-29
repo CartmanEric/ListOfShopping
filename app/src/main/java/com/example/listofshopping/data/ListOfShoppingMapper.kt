@@ -5,7 +5,9 @@ import javax.inject.Inject
 
 class ListOfShoppingMapper @Inject constructor() {
     fun mapEntityToDbModel(listOfShoppingModel: ListOfShoppingModel) = ListOfShoppingDbModel(
+
         id = listOfShoppingModel.id,
+        data = listOfShoppingModel.data,
         lcd = listOfShoppingModel.lcd,
         others = listOfShoppingModel.others,
         ports = listOfShoppingModel.ports
@@ -13,6 +15,7 @@ class ListOfShoppingMapper @Inject constructor() {
 
     private fun mapDbModelToEntity(listOfShoppingDbModel: ListOfShoppingDbModel) = ListOfShoppingModel(
         id = listOfShoppingDbModel.id,
+        data = listOfShoppingDbModel.data,
         lcd = listOfShoppingDbModel.lcd,
         others = listOfShoppingDbModel.others,
         ports = listOfShoppingDbModel.ports

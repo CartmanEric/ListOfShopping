@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class ListOfShoppingDbModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val data: String,
     val lcd: String,
     val others: String,
     val ports: String
