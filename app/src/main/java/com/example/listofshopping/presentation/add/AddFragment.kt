@@ -77,7 +77,7 @@ class AddFragment : Fragment() {
     }
 
     private fun getCurrentData(): String {
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm", Locale.US)
+        val sdf = SimpleDateFormat("dd/M/yyyy HH:mm", Locale.getDefault())
         return sdf.format(Date())
     }
 
